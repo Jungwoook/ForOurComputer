@@ -2,10 +2,13 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
+var ejs = require('ejs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var testRouter = require('./routes/testpage');
 
 var app = express();
 
@@ -13,14 +16,22 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// port setup
+app.set('port', process.env.PORT || 3000);
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/views',express.static(__dirname + '/views'));
+app.engine('html', ejs.renderFile);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/test', testRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,3 +50,7 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+var server = app.listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + server.address().port);
+});
