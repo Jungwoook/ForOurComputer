@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+
+<form id="menu-form" class="user-form" action="" method="post">
+    <select name="program" id="drop1" required>
+        <option value="" selected hidden>게임 이름</option>
+    </select>
+    <select name="spec" id="drop2" required>
+        <option value="" selected hidden>사양</option>
+    </select>
+    <input type="submit" value="SUBMIT">
+</form>
+
+<script>
+    $(document).ready(function(){
+
+
+        var newOption1 = $('<option value="'+ 'Menu1' +'">'+ 'Menu1' +'</option>');
+        $('#drop1').append(newOption1);
+        var newOption2 = $('<option value="'+ 'Menu2' +'">'+ 'Menu2' +'</option>');
+        $('#drop1').append(newOption2);
+        var newOption3 = $('<option value="'+ 'Menu3' +'">'+ 'Menu3' +'</option>');
+        $('#drop1').append(newOption3);
+
+        var newOption4 = $('<option value="'+ '최소' +'">'+ '최소사양' +'</option>');
+        $('#drop2').append(newOption4);
+        var newOption5 = $('<option value="'+ '권장' +'">'+ '권장사양' +'</option>');
+        $('#drop2').append(newOption5);
+
+        $("#menu-form").submit(function (ev) {
+
+            var formData = $("#menu-form").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/select",
+                cache: false,
+                data: formData,
+                success: function (data, status){
+                    console.log(data);
+
+                    if(data.success == true){
+                        alert('전달 성공! ');
+                        location.href = '/test'; // 이동할 페이지(get) 로그인 성공
+                    } else {
+                        alert('전달 실패! ');
+                    }
+                },
+                error: function onError(data, status) {
+                    alert("서버 문제가 발생했습니다.\n다시 시도해 주시기 바랍니다.");
+                }
+            });
+            ev.preventDefault();
+        });
+    });
+</script>
+</body>
+</html>

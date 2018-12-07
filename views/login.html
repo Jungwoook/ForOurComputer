@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+         #login-div {
+             text-align : center;
+             vertical-align: middle;
+             margin-top : 20%;
+        }
+        input {
+            align-self: right;
+        }
+         .label-input-class  input[type=text], input[type=password] {
+             width: 20%;
+             padding: 12px 20px;
+             margin: 4px 0;
+             display: inline-block;
+             border: 1px solid #ccc;
+             box-sizing: border-box;
+         }
+    </style>
+</head>
+<body>
+
+<div id="login-div">
+    <h3>Login</h3>
+    <form id="login-form" class="user-form" action="" method="post">
+        <div class="label-input-class" width="200px">
+        <label width="100">ID</label>
+        <input id="inputId" type="text" placeholder="ID" name="id" maxlength="16" required="required">
+        </div>
+        <br>
+        <div class="label-input-class" width="200px">
+        <label width="100">Password</label>
+        <input id="inputPassword" type="password" placeholder="Password" name="password" maxlength="16" required="required">
+        </div>
+        <br>
+        <input type="submit" value="SUBMIT">
+    </form>
+</div>
+
+<script>
+
+    $("#login-form").submit(function (ev) {
+
+        var formData = $("#login-form").serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            cache: false,
+            data: formData,
+            success: function (data, status){
+                console.log(data);
+
+                if(data.success == true){
+                    alert('로그인 성공! ');
+                    location.href = '/select'; // 이동할 페이지(get) 로그인 성공
+                } else {
+                    alert('로그인 실패! ');
+                }
+            },
+            error: function onError(data, status) {
+                alert("서버 문제가 발생했습니다.\n다시 시도해 주시기 바랍니다.");
+            }
+        });
+        ev.preventDefault();
+    });
+
+</script>
+</body>
+</html>

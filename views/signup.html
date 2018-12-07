@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+
+<h3>Sign Up</h3>
+<form id="signup-form" class="user-form" action="" method="post">
+    <label width="100">ID</label>
+    <input id="inputId" type="text" placeholder="ID" name="id" maxlength="16" required="required">
+    <br>
+    <label width="100">Password</label>
+    <input id="inputPassword" type="password" placeholder="Password" name="password" maxlength="16" required="required">
+    <br>
+    <label width="100">Name</label>
+    <input type="text" placeholder="Name" name="name" maxlength="10" required="required">
+    <br>
+    <input type="submit" value="SUBMIT">
+</form>
+
+<script>
+    function validation(userType) {
+        var msg = '';
+        var err = false;
+        var val;
+        var regex;
+
+        val = $("#inputId").val();
+        console.log(val)
+        regex = /^[A-Za-z0-9+]{4,16}$/;
+
+        if (!regex.test(val)) {
+            msg += "ID: 4자리 이상 16자리 이하, 영문, 숫자만 가능";
+            err = true;
+        }
+        val = $("#inputPassword").val();
+        regex = /^[a-z0-9\W+]{4,16}$/;
+        if (!regex.test(val)) {
+            msg += "\nPASSWORD: 4자리 이상 16자리 이하, 영문과 숫자 특수문자만 가능";
+            err = true;
+        }
+
+        if (err)  {
+            alert(msg);
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    $("#signup-form").submit(function (ev) {
+        console.log('hello')
+        if (validation()) {
+            ev.preventDefault();
+            return;
+        }
+
+        var formData = $("#signup-form").serialize();
+        console.log(formData);
+
+        $.ajax({
+            type: "POST",
+            url: "/signup",
+            cache: false,
+            data: formData,
+            success: function (data, status){
+                console.log(data);
+                console.log(data.success);
+
+                if(data.success == true){
+                    alert('회원가입 성공! ');
+                    location.href = '/login'; // 이동할 페이지(get)
+                } else {
+                    alert('서버 문제가 발생했습니다.\n다시 시도해 주시기 바랍니다. ');
+                }
+            },
+            error: function onError(data, status) {
+                alert("중복된 id 존재 / 회원가입 실패");
+            }
+        });
+        ev.preventDefault();
+    });
+
+</script>
+</body>
+</html>
