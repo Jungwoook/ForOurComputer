@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../public/javascripts/jquery.cookie.js"></script>
     <meta charset="UTF-8">
     <title>Login</title>
     <style>
@@ -40,9 +41,15 @@
         <br>
         <input type="submit" value="SUBMIT">
     </form>
+    <br>
+    <button id="signup-btn">회원가입</button>
 </div>
 
 <script>
+
+    $("#signup-btn").click(function (ev) {
+        location.href = '/signup';
+    });
 
     $("#login-form").submit(function (ev) {
 

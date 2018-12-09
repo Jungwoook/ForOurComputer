@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/javascripts/jquery.cookie.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -10,18 +11,26 @@
 <h1>This is Test Page!</h1>
 <br>
 <p id="test-message"></p>
-<button id="logout-btn" href="/logout">로그아웃</button>
+<button id="logout-btn" onclick="location.href='/logout'">로그아웃</button>
 </body>
 
 <script>
 
     $("#test-message").text("테스트중");
 
-    if($.cookie("userName") == undefined) {
-        $("#test-message").text("로그인 해주세요");
-    } else{
-        $("#test-message").text("로그인 완료!");
-    }
+    $.ajax({
+        type: "GET",
+        url: "/name",
+        cache: false,
+        success: function (data, status){
+            console.log(data);
+
+            $("#test-message").text(data.name + "님이 로그인하셨습니다.");
+        },
+        error: function onError(data, status) {
+            alert("서버 문제가 발생했습니다.\n다시 시도해 주시기 바랍니다.");
+        }
+    });
 
 </script>
 </html>

@@ -7,10 +7,12 @@ router.get('/', function(req, res, next) {
     console.log(req.session);
     if(req.session.userName != undefined) {
         console.log('로그인했음');
+        res.redirect('/menu');
     } else {
         console.log("로그인안함");
+        res.render('login.html');
     }
-    res.render('login.html');
+
 });
 
 router.post('/', function(req, res, next) {
@@ -28,8 +30,6 @@ router.post('/', function(req, res, next) {
                 sess.userID = req.body.id;
                 sess.userName = rows[0].name;
                 console.log('로그인 성공');
-                console.log(req.session);
-                // res.json({success:true});
                 res.send({success:true});
             }
             connection.release();
