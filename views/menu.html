@@ -23,60 +23,35 @@
 <script>
     $(document).ready(function(){
 
+        $('#drop1').append($('<option value="롤">'+ '리그오브레전드' +'</option>'));
+        $('#drop1').append($('<option value="로스트아크">'+ '로스트아크' +'</option>'));
+        $('#drop1').append($('<option value="배틀그라운드">'+ '배틀그라운드' +'</option>'));
+        $('#drop1').append($('<option value="피파온라인4">'+ '피파온라인4' +'</option>'));
+        $('#drop1').append($('<option value="오버워치">'+ '오버워치' +'</option>'));
+        $('#drop1').append($('<option value="서든어택">'+ '서든어택' +'</option>'));
+        $('#drop1').append($('<option value="스타크래프트">'+ '스타크래프트' +'</option>'));
+        $('#drop1').append($('<option value="메이플스토리">'+ '메이플스토리' +'</option>'));
+        $('#drop1').append($('<option value="카트라이더">'+ '카트라이더' +'</option>'));
+        $('#drop1').append($('<option value="던전앤파이터">'+ '던전앤파이터' +'</option>'));
+        $('#drop1').append($('<option value="와우">'+ '월드오브워크래프트' +'</option>'));
+        $('#drop1').append($('<option value="리니지">'+ '리니지' +'</option>'));
+        $('#drop1').append($('<option value="블레이드앤소울">'+ '블레이드앤소울' +'</option>'));
+        $('#drop1').append($('<option value="데스티니가디언즈">'+ '데스티니가디언즈' +'</option>'));
+        $('#drop1').append($('<option value="사이퍼즈">'+ '사이퍼즈' +'</option>'));
+        $('#drop1').append($('<option value="디아블로3">'+ '디아블로3' +'</option>'));
+        $('#drop1').append($('<option value="아이온">'+ '아이온' +'</option>'));
+        $('#drop1').append($('<option value="포트나이트">'+ '포트나이트' +'</option>'));
+        $('#drop1').append($('<option value="히오스">'+ '히어로즈오브더스톰' +'</option>'));
+        $('#drop1').append($('<option value="리니지2">'+ '리니지2' +'</option>'));
+        
+        
+        // .program {
+        //     max-height:200px;
+        //     overflow:scroll;
+        // }
 
-        var newOption1 = $('<option value="'+ '1' +'">'+ '리그오브레전드' +'</option>');
-        $('#drop1').append(newOption1);
-        var newOption2 = $('<option value="'+ '2' +'">'+ '로스트아크' +'</option>');
-        $('#drop1').append(newOption2);
-        var newOption3 = $('<option value="'+ '3' +'">'+ '배틀그라운드' +'</option>');
-        $('#drop1').append(newOption3);
-        var newOption4 = $('<option value="'+ '4' +'">'+ '피파온라인4' +'</option>');
-        $('#drop1').append(newOption4);
-        var newOption5 = $('<option value="'+ '5' +'">'+ '오버워치' +'</option>');
-        $('#drop1').append(newOption5);
-        var newOption6 = $('<option value="'+ '6' +'">'+ '서든어택' +'</option>');
-        $('#drop1').append(newOption6);
-        var newOption7 = $('<option value="'+ '7' +'">'+ '스타크래프트' +'</option>');
-        $('#drop1').append(newOption7);
-        var newOption8 = $('<option value="'+ '8' +'">'+ '메이플스토리' +'</option>');
-        $('#drop1').append(newOption8);
-        var newOption9 = $('<option value="'+ '9' +'">'+ '카트라이더' +'</option>');
-        $('#drop1').append(newOption9);
-        var newOption10 = $('<option value="'+ '10' +'">'+ '던전앤파이터' +'</option>');
-        $('#drop1').append(newOption10);
-        var newOption11 = $('<option value="'+ '11' +'">'+ '월드오브워크래프트' +'</option>');
-        $('#drop1').append(newOption11);
-        var newOption12 = $('<option value="'+ '12' +'">'+ '리니지' +'</option>');
-        $('#drop1').append(newOption12);
-        var newOption13 = $('<option value="'+ '13' +'">'+ '블레이드앤소울' +'</option>');
-        $('#drop1').append(newOption13);
-        var newOption14 = $('<option value="'+ '14' +'">'+ '데스티니가디언즈' +'</option>');
-        $('#drop1').append(newOption14);
-        var newOption15 = $('<option value="'+ '15' +'">'+ '사이퍼즈' +'</option>');
-        $('#drop1').append(newOption15);
-        var newOption16 = $('<option value="'+ '16' +'">'+ '디아블로3' +'</option>');
-        $('#drop1').append(newOption16);
-        var newOption17 = $('<option value="'+ '17' +'">'+ '아이온' +'</option>');
-        $('#drop1').append(newOption17);
-        var newOption318 = $('<option value="'+ '18' +'">'+ '포트나이트' +'</option>');
-        $('#drop1').append(newOption18);
-        var newOption19 = $('<option value="'+ '19' +'">'+ '히어로즈오브더스톰' +'</option>');
-        $('#drop1').append(newOption19);
-        var newOption20 = $('<option value="'+ '20' +'">'+ '리니지2' +'</option>');
-        $('#drop1').append(newOption20);
-        
-        
-        .program {
-            max-height:200px;
-            overflow:scroll; 
-        }
-        
-        
-
-        var newOption01 = $('<option value="'+ '1' +'">'+ '최소사양' +'</option>');
-        $('#drop2').append(newOption4);
-        var newOption02 = $('<option value="'+ '2' +'">'+ '권장사양' +'</option>');
-        $('#drop2').append(newOption5);
+        $('#drop2').append($('<option value="min">'+ '최소사양' +'</option>'));
+        $('#drop2').append($('<option value="rec">'+ '권장사양' +'</option>'));
 
         $("#menu-form").submit(function (ev) {
 
