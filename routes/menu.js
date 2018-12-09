@@ -22,20 +22,46 @@ router.post('/', function(req, res, next) {
 
     pool.getConnection(function(err,connection){
 
-        connection.query('select * from Requirements where P_Name=? AND Specification=?', [req.body.program, req.body.spec], function (err, rows) {
+        connection.query('select * from Requirements where P_Name=? AND Specification=?', [req.body.program, req.body.spec], function (err, rows_p) {
             if(err){ connection.release(); }
 
-            console.log(rows);
+            console.log(rows_p);
 
-            if(rows.length == 0) {
+            if(rows_p.length == 0) {
                 console.log('검색 실패');
                 res.json({success:false});
+                connection.release();
             } else {
                 console.log('검색 성공');
-                // res.send({success:true});
-                res.send({success:true, info:rows[0]});
+                connection.query('select * from CPU where Pspeed >= ? order by C_price asc', rows_p[0].CPU, function (err, rows_c) {
+                    if(err) { connection.release(); }
+
+                    var cpuData = JSON.parse(JSON.stringify(rows_c));
+                    // console.log(cpuData);
+                    var cpuInfo = [];
+                    for(var i = 0; i < rows_c.length; i++) {
+                        console.log(cpuData[i]);
+                        cpuInfo.push(cpuData[i]);
+                    }
+                    connection.query('select * from GPU where Memory >= ? order by price asc', rows_p[0].GPU, function (err, rows_g) {
+                        if(err) { connection.release(); }
+
+                        var gpuData = JSON.parse(JSON.stringify(rows_g));
+                        var gpuInfo = [];
+                        for(var i = 0; i < rows_g.length; i++) {
+                            console.log(gpuData[i]);
+                            gpuInfo.push(gpuData[i]);
+                        }
+
+                        res.send({success:true, cpu:cpuInfo, gpu:gpuInfo});
+                        connection.release();
+                    });
+                    // res.send({success:true, cpu:cpuInfo});
+                    // connection.release();
+                });
+                // res.send({success:true, info:rows[0]});
+                // connection.release();
             }
-            connection.release();
         });
     });
 });

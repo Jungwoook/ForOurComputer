@@ -18,7 +18,15 @@
     <input type="submit" value="SUBMIT">
     <br><br>
     <button id="logout-btn" onclick="location.href='/logout'">로그아웃</button>
+
+
 </form>
+
+<p id="cpuname"></p>
+
+<p id="cpu-info" ></p>
+<br>
+<p id="gpu-info" ></p>
 
 <script>
     $(document).ready(function(){
@@ -66,8 +74,13 @@
                     console.log(data);
 
                     if(data.success == true){
-                        alert('전달 성공! ');
-                        location.href = '/test'; // 이동할 페이지(get) 로그인 성공
+                        $("#menu-form").hide();
+                        console.log(data.cpu);
+                        $("#cpuname").text("cpu : " + data.cpu[0].C_name);
+                        $("#cpu-info").text("cpu : " + JSON.stringify(data.cpu));
+                        $("#gpu-info").text("gpu : " + JSON.stringify(data.gpu));
+                        // alert('전달 성공! \n ' + JSON.stringify(data.info));
+                        // location.href = '/test'; // 이동할 페이지(get) 로그인 성공
                     } else {
                         alert('전달 실패! ');
                     }
